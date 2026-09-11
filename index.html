@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CoinhakoBox — Your Investment Toolkit</title>
+<meta name="description" content="CoinhakoBox is a comprehensive investment toolkit for retail traders and long-term investors. Track markets, manage portfolios, and analyze trades — all in one app." />
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; color: #1a1a1a; background: #ffffff; line-height: 1.6; }
+  a { color: #b8860b; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .hero {
+    background: linear-gradient(135deg, #0f1419 0%, #1a2332 50%, #2a3f5f 100%);
+    color: #fff;
+    padding: 100px 20px 80px;
+    text-align: center;
+  }
+  .hero .badge { display: inline-block; padding: 6px 14px; border: 1px solid #d4af37; color: #d4af37; border-radius: 20px; font-size: 13px; letter-spacing: 1px; margin-bottom: 24px; }
+  .hero h1 { font-size: 48px; font-weight: 700; margin-bottom: 20px; letter-spacing: -1px; }
+  .hero h1 .accent { color: #d4af37; }
+  .hero p { font-size: 19px; color: #c8d0db; max-width: 680px; margin: 0 auto 36px; }
+  .hero .cta { display: inline-block; background: #d4af37; color: #0f1419; padding: 14px 36px; border-radius: 30px; font-weight: 600; font-size: 16px; }
+  .hero .cta:hover { background: #e8c34d; text-decoration: none; }
+
+  nav { background: #0f1419; padding: 16px 20px; text-align: center; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid #1a2332; }
+  nav a { color: #c8d0db; margin: 0 18px; font-size: 14px; font-weight: 500; }
+  nav a:hover { color: #d4af37; text-decoration: none; }
+
+  section { padding: 80px 20px; }
+  .container { max-width: 1100px; margin: 0 auto; }
+  .section-title { text-align: center; margin-bottom: 60px; }
+  .section-title h2 { font-size: 36px; font-weight: 700; margin-bottom: 12px; color: #0f1419; }
+  .section-title p { font-size: 17px; color: #666; max-width: 600px; margin: 0 auto; }
+
+  .features { background: #f8f9fb; }
+  .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 28px; }
+  .feature-card {
+    background: #fff;
+    padding: 32px 28px;
+    border-radius: 16px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .feature-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+  .feature-icon {
+    width: 48px; height: 48px;
+    background: linear-gradient(135deg, #d4af37, #b8860b);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 24px; font-weight: 700;
+    margin-bottom: 18px;
+  }
+  .feature-card h3 { font-size: 19px; margin-bottom: 10px; color: #0f1419; }
+  .feature-card p { color: #666; font-size: 15px; }
+
+  .highlight {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+  .highlight.reverse { direction: rtl; }
+  .highlight.reverse > * { direction: ltr; }
+  .highlight-text h3 { font-size: 30px; margin-bottom: 18px; color: #0f1419; }
+  .highlight-text p { color: #555; font-size: 16px; margin-bottom: 14px; }
+  .highlight-text ul { list-style: none; padding: 0; }
+  .highlight-text ul li { padding: 6px 0 6px 26px; position: relative; color: #444; }
+  .highlight-text ul li::before { content: "✓"; position: absolute; left: 0; color: #d4af37; font-weight: 700; }
+
+  .visual {
+    background: linear-gradient(135deg, #0f1419, #2a3f5f);
+    border-radius: 24px;
+    padding: 60px 40px;
+    color: #fff;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(15,20,25,0.3);
+  }
+  .visual .mock-app { background: #1a2332; border-radius: 20px; padding: 30px; border: 1px solid #2a3f5f; }
+  .visual .mock-ticker { display: flex; justify-content: space-between; align-items: center; padding: 14px 16px; border-bottom: 1px solid #2a3f5f; }
+  .visual .mock-ticker:last-child { border-bottom: none; }
+  .mock-symbol { font-weight: 600; color: #d4af37; }
+  .mock-price { color: #fff; font-weight: 500; }
+  .mock-change-up { color: #4ade80; font-size: 14px; }
+  .mock-change-down { color: #f87171; font-size: 14px; }
+
+  .privacy-cta { background: #0f1419; color: #fff; text-align: center; }
+  .privacy-cta h2 { color: #fff; }
+  .privacy-cta p { color: #c8d0db; }
+  .privacy-cta .cta { display: inline-block; background: #d4af37; color: #0f1419; padding: 14px 36px; border-radius: 30px; font-weight: 600; margin-top: 18px; }
+  .privacy-cta .cta:hover { background: #e8c34d; text-decoration: none; }
+
+  footer { background: #0a0e13; color: #8a95a8; padding: 50px 20px 30px; text-align: center; }
+  footer .links { margin-bottom: 20px; }
+  footer .links a { color: #c8d0db; margin: 0 14px; font-size: 14px; }
+  footer .links a:hover { color: #d4af37; }
+  footer .contact { font-size: 14px; margin-bottom: 10px; }
+  footer .copyright { font-size: 13px; color: #5a6478; margin-top: 20px; padding-top: 20px; border-top: 1px solid #1a2332; }
+
+  @media (max-width: 768px) {
+    .hero h1 { font-size: 34px; }
+    .hero p { font-size: 17px; }
+    .highlight { grid-template-columns: 1fr; gap: 40px; }
+    .section-title h2 { font-size: 28px; }
+    nav a { margin: 0 10px; font-size: 13px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="#features">Features</a>
+  <a href="support.html">Support</a>
+  <a href="terms.html">Terms</a>
+  <a href="privacy.html">Privacy</a>
+</nav>
+
+<section class="hero">
+  <span class="badge">NOW AVAILABLE</span>
+  <h1><span class="accent">CoinhakoBox</span><br>Your Complete Investment Toolkit</h1>
+  <p>Track real-time markets, log every trade, and analyze your portfolio — all in one beautifully crafted iPhone app built for serious investors.</p>
+  <a href="#features" class="cta">Explore Features</a>
+</section>
+
+<section id="features" class="features">
+  <div class="container">
+    <div class="section-title">
+      <h2>Everything You Need to Invest Smarter</h2>
+      <p>Designed for retail traders and long-term investors managing positions across global equity markets.</p>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">��</div>
+        <h3>Real-Time Market Tracking</h3>
+        <p>Monitor price movements across US, Hong Kong, and international markets with interactive candlestick, line, and area charts.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⭐</div>
+        <h3>Personalized Watchlist</h3>
+        <p>Follow the symbols that matter most to you, and analyze top gainers, losers, and most active names across ten industry sectors.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">��</div>
+        <h3>Complete Trade Journal</h3>
+        <p>Log every buy and sell decision with photos of confirmations, notes about your thesis, and full execution details.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">��</div>
+        <h3>Portfolio Analytics</h3>
+        <p>Automatically compute cost basis, unrealized P&amp;L, today's performance, and sector allocation through intuitive pie charts.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">��</div>
+        <h3>Investment Calculators</h3>
+        <p>Estimate per-trade profit/loss, project long-term compound growth, and convert between 11 major currencies.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">��</div>
+        <h3>Curated Financial News</h3>
+        <p>Stay informed on market-moving headlines with category filters for quick access to technology, energy, and macro coverage.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">��</div>
+        <h3>100% Private &amp; On-Device</h3>
+        <p>No account required, no third-party tracking. All your data stays on your device, with optional CSV export.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">��</div>
+        <h3>Crafted for Clarity</h3>
+        <p>A purpose-built experience that values clarity, performance, and craftsmanship — for investors who do the same.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="highlight">
+      <div class="highlight-text">
+        <h3>See the Market at a Glance</h3>
+        <p>Track your favorite stocks with a beautifully designed interface. Watch real-time price action, sparkline trends, and key metrics for every symbol on your watchlist.</p>
+        <ul>
+          <li>Interactive candlestick, line, and area charts</li>
+          <li>Color-coded price changes and percentage moves</li>
+          <li>90-day performance line chart for portfolio value</li>
+        </ul>
+      </div>
+      <div class="visual">
+        <div class="mock-app">
+          <div class="mock-ticker">
+            <span class="mock-symbol">AAPL</span>
+            <span class="mock-price">$189.42</span>
+            <span class="mock-change-up">+2.34%</span>
+          </div>
+          <div class="mock-ticker">
+            <span class="mock-symbol">TSLA</span>
+            <span class="mock-price">$248.71</span>
+            <span class="mock-change-down">-1.18%</span>
+          </div>
+          <div class="mock-ticker">
+            <span class="mock-symbol">NVDA</span>
+            <span class="mock-price">$892.05</span>
+            <span class="mock-change-up">+4.62%</span>
+          </div>
+          <div class="mock-ticker">
+            <span class="mock-symbol">0700.HK</span>
+            <span class="mock-price">HK$362.40</span>
+            <span class="mock-change-up">+0.87%</span>
+          </div>
+          <div class="mock-ticker">
+            <span class="mock-symbol">MSFT</span>
+            <span class="mock-price">$415.89</span>
+            <span class="mock-change-down">-0.42%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="features">
+  <div class="container">
+    <div class="highlight reverse">
+      <div class="highlight-text">
+        <h3>Built for Privacy</h3>
+        <p>Your investment data is yours alone. CoinhakoBox stores everything locally on your device. We never collect, transmit, or sell your personal information.</p>
+        <ul>
+          <li>No account creation required</li>
+          <li>No third-party analytics or tracking</li>
+          <li>Export your data anytime as CSV</li>
+        </ul>
+      </div>
+      <div class="highlight-text">
+        <h3>Designed for Investors</h3>
+        <p>Whether you hold a handful of core positions or maintain a diversified multi-sector portfolio, CoinhakoBox brings every part of your workflow into one app.</p>
+        <ul>
+          <li>Detailed holding breakdowns by sector</li>
+          <li>Cost basis and unrealized P&amp;L tracking</li>
+          <li>Multi-currency support with 11 major currencies</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="privacy-cta">
+  <div class="container">
+    <div class="section-title">
+      <h2>Questions or Feedback?</h2>
+      <p>Our team is here to help. Reach out anytime and we'll get back to you as soon as possible.</p>
+      <a href="support.html" class="cta">Contact Support</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="links">
+    <a href="index.html">Home</a>
+    <a href="support.html">Support</a>
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="terms.html">Terms of Use</a>
+  </div>
+  <div class="contact">
+    Contact: <a href="mailto:karlawsokunevajob68@gmail.com">karlawsokunevajob68@gmail.com</a>
+  </div>
+  <div class="copyright">
+    &copy; 2026 CoinhakoBox. All rights reserved.
+  </div>
+</footer>
+
+</body>
+</html>
